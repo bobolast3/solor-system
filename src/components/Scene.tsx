@@ -8,12 +8,14 @@ import { Sun } from "../classes/Sun";
 import { StarField } from "../classes/StarField";
 import { planetsData, sunData } from "../input";
 import { InfoPanel } from "./Panel";
+import { InstructionsOverlay } from "./InstructionOverlay";
 
 export default function Scene() {
   const mountRef = useRef<HTMLDivElement>(null);
   const [selectedBody, setSelectedBody] = useState<null | Record<string, any>>(
     null,
   );
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -110,7 +112,11 @@ export default function Scene() {
           const planet = planets.find((p) => p.mesh === obj);
           if (planet) setSelectedBody(planet.getInfo());
         }
-      } else setSelectedBody(null);
+        setHasInteracted(true);
+      } else {
+        setSelectedBody(null);
+        setHasInteracted(false);
+      }
     }
 
     mount.addEventListener("click", onClick);
@@ -153,6 +159,7 @@ export default function Scene() {
       <div ref={mountRef} style={{ width: "100vw", height: "100vh" }} />
 
       {selectedBody && <InfoPanel body={selectedBody} />}
+      {!hasInteracted && <InstructionsOverlay />}
     </>
   );
 }
