@@ -7,6 +7,10 @@ You can run it locally with Node.js or inside a Docker container.
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## View Project Website
+
+https://solor-system-opal.vercel.app/
+
 ## Installation (Node.js)
 
 ### Clone the repository
